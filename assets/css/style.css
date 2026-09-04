@@ -89,7 +89,7 @@ main section:nth-of-type(2) article {
 main section:nth-of-type(2) article h3 {
     font-size: 0.95rem;
     color: #55677a;
-    margin-bottom: 0.5 rem;
+    margin-bottom: 0.5rem;
 }
 
 main section:nth-of-type(2) article p {
@@ -105,7 +105,7 @@ table {
 
 th, td {
     text-align: left;
-    padding: 0,65rem 0.75rem;
+    padding: 0.65rem 0.75rem;
     border-bottom: 1px solid #e2e6ea;
 }
 
@@ -185,4 +185,81 @@ footer {
     padding: 1.25rem;
     color: #7a8794;
     font-size: 0.9rem;
+}
+
+main section:nth-of-type(2) h2 {
+    grid-column: 1 / -1;
+}
+
+/**Jobsheet 3*/
+.nav-toggle-label {
+    display: none;
+}
+
+.nav-toggle-label {
+    display: none;
+    font-size: 1.6rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+/*JS3 Latihan1*/
+@media (min-width: 1400px) {
+    main {
+        max-width: 1300px;
+    }
+}
+
+/*JS3 Latihan2*/
+/* Mengubah 768px menjadi 900px */
+@media (max-width: 900px) {
+    main section:nth-of-type(2) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 780px) {
+    header {
+        position: relative;
+    }
+
+    .nav-toggle-label {
+        display: block;
+    }
+
+    header nav {
+        display: none;
+        width: 100%;
+        order: 3;
+        margin-top: 1rem;
+    }
+
+    .nav-toggle:checked ~ nav {
+        display: block;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    main section:nth-of-type(2) {
+        grid-template-columns: 1fr;
+    }
+
+    form input,
+    form select {
+        max-width: 100%;
+    }
+}
+
+/*JS3 Latihan 3*/
+pre {
+    max-width: 100%;
+    overflow-x: auto;
+    background-color: #2d3748;
+    color: #edf2f7;
+    padding: 1rem;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
 }
