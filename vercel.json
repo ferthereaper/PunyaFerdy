@@ -1,22 +1,10 @@
 {
-  "builds": [
-    { "src": "index.php", "use": "vercel-php@0.7.2" },
-    { "src": "reset_session.php", "use": "vercel-php@0.7.2" },
-    { "src": "pelanggan/list.php", "use": "vercel-php@0.7.2" },
-    { "src": "pelanggan/tambah.php", "use": "vercel-php@0.7.2" },
-    { "src": "pelanggan/proses_tambah.php", "use": "vercel-php@0.7.2" },
-    { "src": "produk/list.php", "use": "vercel-php@0.7.2" },
-    { "src": "produk/tambah.php", "use": "vercel-php@0.7.2" },
-    { "src": "produk/proses_tambah.php", "use": "vercel-php@0.7.2" },
-    { "src": "pesanan/list.php", "use": "vercel-php@0.7.2" },
-    { "src": "pesanan/tambah.php", "use": "vercel-php@0.7.2" },
-    { "src": "pesanan/proses_tambah.php", "use": "vercel-php@0.7.2" }
-  ],
+  "functions": {
+    "api/*.php": {
+      "runtime": "vercel-php@0.7.2"
+    }
+  },
   "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "/$1"
