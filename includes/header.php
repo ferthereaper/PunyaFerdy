@@ -16,8 +16,11 @@
                 <li><a href="/buku/list.php">Daftar Buku</a></li>
                 <li><a href="/buku/tambah.php">Tambah Buku</a></li>
                 <li><a href="/anggota/list.php">Daftar Anggota</a></li>
-                <li><a href="/anggota/tambah.php">Tambah Anggota</a></li>
-                <li><a href="/reset_session.php" onclick="return confirm('Apakah Anda yakin ingin mereset seluruh data sementara?');" style="color: #999999;">Reset Data</a></li>
+                <li><a href="/anggota/tambah.php">Tambah Anggota</a></li><li>
+                    <form action="/reset_session.php" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin mereset seluruh data sementara?');">
+                        <button type="submit" style="background: none; border: none; color: #999999; font: inherit; cursor: pointer; padding: 0;">Reset Data</button>
+                    </form>
+                </li>
             </ul>
         </nav>
     </header>
