@@ -1,6 +1,9 @@
 <?php
-session_start();
-require __DIR__ . '/../includes/koneksi.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require __DIR__ . '/../../includes/koneksi.php';
 
 $judul = trim($_POST['judul'] ?? '');
 $pengarang = trim($_POST['pengarang'] ?? '');
