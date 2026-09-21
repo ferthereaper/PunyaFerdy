@@ -2,11 +2,15 @@
 session_start();
 
 // 1. Sertakan koneksi database
-require_once __DIR__ . '/../includes/koneksi.php'; // Sesuaikan dengan nama file koneksi kamu
+require_once __DIR__ . '/../includes/koneksi.php';
 
-// 2. Hapus seluruh data buku dari tabel database
-$query = "TRUNCATE TABLE buku"; // Atau "DELETE FROM buku" jika ada relasi Foreign Key
-mysqli_query($koneksi, $query);
+// 2. Hapus seluruh data buku dari tabel database menggunakan PDO
+try {
+    $query = "TRUNCATE TABLE buku RESTART IDENTITY"; // RESTART IDENTITY mereset urutan ID di PostgreSQL
+    $pdo->exec($query);
+} catch (PDOException $e) {
+    die("Gagal menghapus data: " . $e->getMessage());
+}
 
 // 3. Bersihkan data session
 $_SESSION = array();
