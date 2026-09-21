@@ -4,36 +4,67 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require __DIR__ . '/../../includes/koneksi.php';
 
-$pelangganId = trim($_POST['pelanggan_id'] ?? '');
-$totalHarga  = trim($_POST['total_harga'] ?? '0');
-$status      = trim($_POST['status'] ?? 'Diproses');
+$id          = $_POST['id'] ?? null;
+$idPelanggan = $_POST['id_pelanggan'] ?? '';
+$idProduk    = $_POST['id_produk'] ?? '';
+$jumlah      = (int)($_POST['jumlah'] ?? 1);
 
 $errors = [];
 
-if ($pelangganId === '') {
+if (empty($idPelanggan)) {
     $errors[] = "Pelanggan wajib dipilih.";
 }
-if (!is_numeric($totalHarga) || $totalHarga < 0) {
-    $errors[] = "Total harga harus berupa angka bernilai positif.";
+if (empty($idProduk)) {
+    $errors[] = "Produk wajib dipilih.";
+}
+if ($jumlah < 1) {
+    $errors[] = "Jumlah minimal 1.";
 }
 
 if (!empty($errors)) {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];
-    header('Location: tambah.php');
+    $redirectUrl = $id ? "tambah.php?id=" . urlencode($id) : "tambah.php";
+    header("Location: " . $redirectUrl);
     exit;
 }
 
-$stmt = $pdo->prepare(
-    "INSERT INTO pesanan (pelanggan_id, total_harga, status)
-     VALUES (:pelanggan_id, :total_harga, :status)
-     RETURNING id"
-);
-$stmt->execute([
-    'pelanggan_id' => $pelangganId,
-    'total_harga'  => $totalHarga,
-    'status'       => $status,
-]);
+// Hitung total harga otomatis berdasarkan harga produk di DB
+$stmtHarga = $pdo->prepare("SELECT harga FROM produk WHERE id = ?");
+$stmtHarga->execute([$idProduk]);
+$produkData = $stmtHarga->fetch(PDO::FETCH_ASSOC);
 
-$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Pesanan berhasil ditambahkan.'];
+$hargaSatuan = $produkData['harga'] ?? 0;
+$totalHarga  = $hargaSatuan * $jumlah;
+
+if ($id) {
+    $stmt = $pdo->prepare(
+        "UPDATE pesanan 
+         SET id_pelanggan = :id_pelanggan, id_produk = :id_produk, jumlah = :jumlah, total_harga = :total_harga 
+         WHERE id = :id"
+    );
+    $stmt->execute([
+        'id_pelanggan' => $idPelanggan,
+        'id_produk'    => $idProduk,
+        'jumlah'       => $jumlah,
+        'total_harga'  => $totalHarga,
+        'id'           => $id,
+    ]);
+
+    $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Data pesanan berhasil diperbarui.'];
+} else {
+    $stmt = $pdo->prepare(
+        "INSERT INTO pesanan (id_pelanggan, id_produk, jumlah, total_harga)
+         VALUES (:id_pelanggan, :id_produk, :jumlah, :total_harga)"
+    );
+    $stmt->execute([
+        'id_pelanggan' => $idPelanggan,
+        'id_produk'    => $idProduk,
+        'jumlah'       => $jumlah,
+        'total_harga'  => $totalHarga,
+    ]);
+
+    $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Pesanan berhasil dibuat.'];
+}
+
 header('Location: list.php');
 exit;
