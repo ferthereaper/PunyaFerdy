@@ -1,5 +1,9 @@
 
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $page_title = "Beranda";
 include __DIR__ . '/../includes/header.php';
 require __DIR__ . '/../includes/koneksi.php';
