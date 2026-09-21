@@ -7,27 +7,27 @@ $page_title = "Beranda";
 require __DIR__ . '/../includes/koneksi.php';
 include __DIR__ . '/../includes/header.php';
 
-$totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
-$totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
+$totalProduk = $pdo->query("SELECT COUNT(*) FROM produk")->fetchColumn();
+$totalPelanggan = $pdo->query("SELECT COUNT(*) FROM pelanggan")->fetchColumn();
 ?>
 
 <section>
-    <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
-    <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
+    <h2>Selamat Datang di Sistem Pemesanan UMKM</h2>
+    <p>Aplikasi sederhana untuk mengelola data produk dan pelanggan UMKM.</p>
 </section>
 
 <section>
     <h2>Ringkasan</h2>
     <article>
-        <h3>Total Buku</h3>
-        <p><?php echo $totalBuku; ?></p>
+        <h3>Total Produk</h3>
+        <p><?php echo $totalProduk; ?></p>
     </article>
     <article>
-        <h3>Total Anggota</h3>
-        <p><?php echo $totalAnggota; ?></p>
+        <h3>Total Pelanggan</h3>
+        <p><?php echo $totalPelanggan; ?></p>
     </article>
     <article>
-        <h3>Sedang Dipinjam</h3>
+        <h3>Sedang Diproses</h3>
         <p>0</p>
     </article>
 </section>
