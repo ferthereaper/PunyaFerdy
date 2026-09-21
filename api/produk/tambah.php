@@ -2,14 +2,14 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$page_title = "Tambah Buku";
+$page_title = "Tambah Produk";
 include __DIR__ . '/../../includes/header.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 ?>
         <section>
-            <h2>Tambah Buku</h2>
+            <h2>Tambah Produk Baru</h2>
 
             <?php if ($flash): ?>
                 <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo $flash['pesan']; ?></p>
@@ -17,32 +17,24 @@ unset($_SESSION['flash']);
 
             <form id="form-tambah" method="post" action="proses_tambah.php">
                 <p>
-                    <label for="judul">Judul</label><br>
-                    <input type="text" id="judul" name="judul" required>
-                </p>
-                <p>
-                    <label for="pengarang">Pengarang</label><br>
-                    <input type="text" id="pengarang" name="pengarang" required>
-                </p>
-                <p>
-                    <label for="tahun">Tahun Terbit</label><br>
-                    <input type="number" id="tahun" name="tahun" min="1900" max="2026" required>
-                </p>
-                <p>
-                    <label for="isbn">ISBN</label><br>
-                    <input type="text" id="isbn" name="isbn">
-                </p>
-                <p>
-                    <label for="stok">Stok</label><br>
-                    <input type="number" id="stok" name="stok" min="0" required>
+                    <label for="nama_produk">Nama Produk</label><br>
+                    <input type="text" id="nama_produk" name="nama_produk" required>
                 </p>
                 <p>
                     <label for="kategori">Kategori</label><br>
-                    <select id="kategori" name="kategori">
-                        <option value="fiksi">Fiksi</option>
-                        <option value="non-fiksi">Non-Fiksi</option>
-                        <option value="referensi">Referensi</option>
-                    </select>
+                    <input type="text" id="kategori" name="kategori">
+                </p>
+                <p>
+                    <label for="harga">Harga (Rp)</label><br>
+                    <input type="number" id="harga" name="harga" min="0" required>
+                </p>
+                <p>
+                    <label for="stok">Stok</label><br>
+                    <input type="number" id="stok" name="stok" min="0" value="0" required>
+                </p>
+                <p>
+                    <label for="deskripsi">Deskripsi</label><br>
+                    <textarea id="deskripsi" name="deskripsi" rows="3"></textarea>
                 </p>
                 <p>
                     <button type="submit">Simpan</button>

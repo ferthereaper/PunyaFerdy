@@ -2,34 +2,24 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
 require __DIR__ . '/../../includes/koneksi.php';
 
-$judul = trim($_POST['judul'] ?? '');
-$pengarang = trim($_POST['pengarang'] ?? '');
-$tahun = $_POST['tahun'] ?? '';
-$isbn = trim($_POST['isbn'] ?? '');
-$stok = $_POST['stok'] ?? '';
-$kategori = trim($_POST['kategori'] ?? '');
+$namaProduk = trim($_POST['nama_produk'] ?? '');
+$kategori   = trim($_POST['kategori'] ?? '');
+$harga      = trim($_POST['harga'] ?? '0');
+$stok       = trim($_POST['stok'] ?? '0');
+$deskripsi  = trim($_POST['deskripsi'] ?? '');
 
 $errors = [];
-if ($judul === '') {
-    $errors[] = "Judul wajib diisi.";
-}
-if ($pengarang === '') {
-    $errors[] = "Pengarang wajib diisi.";
-}
-if (!is_numeric($tahun) || $tahun < 1900 || $tahun > 2026) {
-    $errors[] = "Tahun harus di antara 1900-2026.";
-}
 
-// Jobsheet 7 Latihan 1
-if ($isbn !== '' && !preg_match('/^[0-9-]+$/', $isbn)) {
-    $errors[] = "ISBN hanya boleh berisi angka dan tanda hubung.";
+if ($namaProduk === '') {
+    $errors[] = "Nama produk wajib diisi.";
 }
-
+if (!is_numeric($harga) || $harga < 0) {
+    $errors[] = "Harga harus berupa angka bernilai positif.";
+}
 if (!is_numeric($stok) || $stok < 0) {
-    $errors[] = "Stok tidak boleh negatif.";
+    $errors[] = "Stok harus berupa angka bernilai positif.";
 }
 
 if (!empty($errors)) {
@@ -39,19 +29,18 @@ if (!empty($errors)) {
 }
 
 $stmt = $pdo->prepare(
-    "INSERT INTO buku (judul, pengarang, tahun, isbn, stok, kategori)
-     VALUES (:judul, :pengarang, :tahun, :isbn, :stok, :kategori)
+    "INSERT INTO produk (nama_produk, kategori, harga, stok, deskripsi)
+     VALUES (:nama_produk, :kategori, :harga, :stok, :deskripsi)
      RETURNING id"
 );
 $stmt->execute([
-    'judul' => $judul,
-    'pengarang' => $pengarang,
-    'tahun' => (int) $tahun,
-    'isbn' => $isbn,
-    'stok' => (int) $stok,
-    'kategori' => $kategori,
+    'nama_produk' => $namaProduk,
+    'kategori'    => $kategori,
+    'harga'       => $harga,
+    'stok'        => $stok,
+    'deskripsi'   => $deskripsi,
 ]);
 
-$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
+$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Produk berhasil ditambahkan.'];
 header('Location: list.php');
 exit;
