@@ -1,290 +1,203 @@
+/* ==========================================
+   PALET WARNA CAIYO (MINIMALIS & MODERN)
+   ========================================== */
+:root {
+    --primary: #d81b60;          /* Pink Stroberi / Caiyo Pink */
+    --primary-hover: #c2185b;    /* Pink Gelap untuk Hover */
+    --secondary: #fce4ec;        /* Soft Pink Muda untuk Accent/Background Card */
+    --bg-main: #fcf8f9;          /* Background Utama Halaman */
+    --card-bg: #ffffff;          /* Background Kartu / Konten */
+    --text-color: #2c2c2c;       /* Warna Teks Utama */
+    --text-muted: #757575;       /* Teks Sekunder */
+    --border-color: #f8bbd0;     /* Border Pink Lembut */
+    --radius: 12px;              /* Sudut Membulat Modern */
+}
+
+/* Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #2b2b2b;
-    background-color: #f5f6f8;
-    line-height: 1.5;
+    background-color: var(--bg-main);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
-a {
-    color: #9b4809;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
+/* Header & Navigation */
 header {
-    /* LATIHAN 1 JS 2*/
-    background-color: #9b4809;
-    
-    color: #fff;
-    padding: 1rem 1.5rem;
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 1rem 2rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.15);
 }
 
-header h1 {
-    font-size: 1.4rem;
+header h1, header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
-header nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.25rem;
-}
-
-header nav a {
-    color: #fff;
-    font-weight: 500;
-}
-
-main {
+/* Layout / Container */
+section {
     max-width: 1000px;
     margin: 2rem auto;
-    padding: 0 1.5rem;
+    padding: 1.5rem;
 }
 
-section {
-    background-color: #fff;
-    border-radius: 8px;
+/* Card Modern Minimalis */
+.card, section > div, table, form {
+    background: var(--card-bg);
+    border-radius: var(--radius);
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
-section h2 {
+h2 {
+    color: var(--primary);
     margin-bottom: 1rem;
-    color: #9b4809;
+    font-size: 1.5rem;
 }
 
-/* main section:nth-of-type(2) {
+/* Grid Dashboard Ringkasan */
+.dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-} */
-
- /* LATIHAN 2 JS 2*/
- main section:nth-of-type(2) {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
 }
 
-main section:nth-of-type(2) article {
-    background-color: #eef4fa;
-    border-radius: 8px;
-    padding: 1.25rem;
+.summary-card {
+    background-color: var(--secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
     text-align: center;
+    transition: transform 0.2s ease;
 }
 
-main section:nth-of-type(2) article h3 {
+.summary-card:hover {
+    transform: translateY(-3px);
+}
+
+.summary-card h3 {
     font-size: 0.95rem;
-    color: #55677a;
+    color: var(--text-muted);
     margin-bottom: 0.5rem;
 }
 
-main section:nth-of-type(2) article p {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #9b4809;
+.summary-card .number {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* Table Styling */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: var(--radius);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    overflow: hidden;
+    padding: 0;
 }
 
-.table-responsive {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-th, td {
+th {
+    background-color: var(--primary);
+    color: #ffffff;
     text-align: left;
-    padding: 0.65rem 0.75rem;
-    border-bottom: 1px solid #e2e6ea;
-}
-
-thead {
-    background-color: #9b4809;
-    color: #fff;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f7f9fb;
-}
-
-tbody tr:hover {
-    background-color: #eef4fa;
-}
-
-td button {
-    padding: 0.35rem 0.7rem;
-    margin-right: 0.35rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
-}
-
-/* LATIHAN NO 3 JS 2 */
-td button.button-edit {
-    background-color: #f0ad4e;
-    color: #fff;
-}
-td button.button-detail {
-    background-color: #d5d4d4;
-    color: #fff;
-}
-td button.button-hapus {
-    background-color: #d9534f;
-    color: #fff;
-}
-
-form p {
-    margin-bottom: 1rem;
-}
-
-form label {
-    display: block;
-    margin-bottom: 0.35rem;
-    font-weight: 600;
-    color: #444;
-}
-
-form input,
-form select {
-    width: 100%;
-    max-width: 400px;
-    padding: 0.55rem 0.7rem;
-    border: 1px solid #cdd4da;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-form button[type="submit"] {
-    background-color: #9b4809;
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.5rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-form button[type="submit"]:hover {
-    background-color: #164869;
-}
-
-footer {
-    text-align: center;
-    padding: 1.25rem;
-    color: #7a8794;
-    font-size: 0.9rem;
-}
-
-main section:nth-of-type(2) h2 {
-    grid-column: 1 / -1;
-}
-
-/**Jobsheet 3*/
-.nav-toggle-label {
-    display: none;
-}
-
-.nav-toggle-label {
-    display: none;
-    font-size: 1.6rem;
-    color: #fff;
-    cursor: pointer;
-}
-
-/*JS3 Latihan1*/
-@media (min-width: 1400px) {
-    main {
-        max-width: 1300px;
-    }
-}
-
-/*JS3 Latihan2*/
-/* Mengubah 768px menjadi 900px */
-@media (max-width: 900px) {
-    main section:nth-of-type(2) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 780px) {
-    header {
-        position: relative;
-    }
-
-    .nav-toggle-label {
-        display: block;
-    }
-
-    header nav {
-        /* display: none; */
-        width: 100%;
-        order: 3;
-        /*JS 5 Latihan 2*/
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out, margin-top 0.3s ease-in-out;
-        margin-top: 1rem;
-    }
-
-    /*JS 5*/
-    header nav.nav-open {
-        /* display: block; */
-        max-height: 300px;
-        margin-top: 1rem;
-    }
-
-    header nav ul {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    main section:nth-of-type(2) {
-        grid-template-columns: 1fr;
-    }
-
-    form input,
-    form select {
-        max-width: 100%;
-    }
-}
-
-.search-box {
-    margin-bottom: 1rem;
-}
-
-.search-box input {
-    width: 100%;
-    max-width: 320px;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #cdd4da;
-    border-radius: 4px;
-}
-
-/*JS3 Latihan 3*/
-pre {
-    max-width: 100%;
-    overflow-x: auto;
-    background-color: #2d3748;
-    color: #edf2f7;
     padding: 1rem;
-    border-radius: 6px;
-    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+
+td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #f8bbd0;
+    color: var(--text-color);
+}
+
+tr:hover {
+    background-color: #fffeef;
+}
+
+/* Form & Input */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+    background-color: #fff;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.1);
+}
+
+/* Button Styling */
+button, .btn {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-hapus {
+    background-color: #e53935;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-hapus:hover {
+    background-color: #c62828;
+}
+
+/* Flash Messages */
+.flash {
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.flash-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.flash-error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
 }
