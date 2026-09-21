@@ -8,9 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // 1. Sertakan koneksi database
 require_once __DIR__ . '/../includes/koneksi.php';
 
-// 2. Hapus seluruh data buku dari tabel database menggunakan PDO
+// 2. Hapus seluruh data tabel UMKM dari database menggunakan PDO
 try {
-    $query = "TRUNCATE TABLE buku RESTART IDENTITY"; // RESTART IDENTITY mereset urutan ID di PostgreSQL
+    // TRUNCATE CASCADE digunakan agar tabel yang saling berhubungan (pesanan ke pelanggan) bisa direset bersamaan
+    $query = "TRUNCATE TABLE pesanan, produk, pelanggan RESTART IDENTITY CASCADE";
     $pdo->exec($query);
 } catch (PDOException $e) {
     die("Gagal menghapus data: " . $e->getMessage());
@@ -31,7 +32,7 @@ session_destroy();
 
 // 4. Buat session baru untuk pesan sukses
 session_start();
-$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Seluruh data session dan data buku berhasil direset.'];
+$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Seluruh data session, produk, pelanggan, dan pesanan berhasil direset.'];
 
 header('Location: index.php');
 exit;

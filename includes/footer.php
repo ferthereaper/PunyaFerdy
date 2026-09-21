@@ -1,7 +1,7 @@
 </main>
 
     <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 7</p>
+        <p>&copy; <?php echo date('Y'); ?> Sistem Pemesanan UMKM &mdash; Jobsheet 7</p>
     </footer>
     <script src="/assets/js/app.js"></script>
     <?php if (!empty($extra_scripts)): foreach ($extra_scripts as $src): ?>
