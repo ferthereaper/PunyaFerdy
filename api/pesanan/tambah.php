@@ -2,14 +2,19 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$page_title = "Tambah Buku";
+
+$page_title = "Tambah Pesanan";
+require __DIR__ . '/../../includes/koneksi.php';
 include __DIR__ . '/../../includes/header.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
+
+// Mengambil daftar pelanggan untuk opsi pilihan
+$daftarPelanggan = $pdo->query("SELECT id, nama FROM pelanggan ORDER BY nama ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
         <section>
-            <h2>Tambah Buku</h2>
+            <h2>Tambah Pesanan Baru</h2>
 
             <?php if ($flash): ?>
                 <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo $flash['pesan']; ?></p>
@@ -17,31 +22,24 @@ unset($_SESSION['flash']);
 
             <form id="form-tambah" method="post" action="proses_tambah.php">
                 <p>
-                    <label for="judul">Judul</label><br>
-                    <input type="text" id="judul" name="judul" required>
+                    <label for="pelanggan_id">Pelanggan</label><br>
+                    <select id="pelanggan_id" name="pelanggan_id" required>
+                        <option value="">-- Pilih Pelanggan --</option>
+                        <?php foreach ($daftarPelanggan as $pelanggan): ?>
+                            <option value="<?php echo $pelanggan['id']; ?>"><?php echo htmlspecialchars($pelanggan['nama']); ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </p>
                 <p>
-                    <label for="pengarang">Pengarang</label><br>
-                    <input type="text" id="pengarang" name="pengarang" required>
+                    <label for="total_harga">Total Harga (Rp)</label><br>
+                    <input type="number" id="total_harga" name="total_harga" min="0" required>
                 </p>
                 <p>
-                    <label for="tahun">Tahun Terbit</label><br>
-                    <input type="number" id="tahun" name="tahun" min="1900" max="2026" required>
-                </p>
-                <p>
-                    <label for="isbn">ISBN</label><br>
-                    <input type="text" id="isbn" name="isbn">
-                </p>
-                <p>
-                    <label for="stok">Stok</label><br>
-                    <input type="number" id="stok" name="stok" min="0" required>
-                </p>
-                <p>
-                    <label for="kategori">Kategori</label><br>
-                    <select id="kategori" name="kategori">
-                        <option value="fiksi">Fiksi</option>
-                        <option value="non-fiksi">Non-Fiksi</option>
-                        <option value="referensi">Referensi</option>
+                    <label for="status">Status</label><br>
+                    <select id="status" name="status">
+                        <option value="Diproses">Diproses</option>
+                        <option value="Selesai">Selesai</option>
+                        <option value="Dibatalkan">Dibatalkan</option>
                     </select>
                 </p>
                 <p>
