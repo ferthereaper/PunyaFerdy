@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require __DIR__ . '/../../includes/koneksi.php';
+require __DIR__ . '/../includes/koneksi.php';
 
 $pelangganId = trim($_POST['pelanggan_id'] ?? '');
 $totalHarga  = trim($_POST['total_harga'] ?? '0');

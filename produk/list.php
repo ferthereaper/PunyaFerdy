@@ -4,8 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $page_title = "Daftar Produk";
-require __DIR__ . '/../../includes/koneksi.php';
-include __DIR__ . '/../../includes/header.php';
+require __DIR__ . '/../includes/koneksi.php';
+include __DIR__ . '/../includes/header.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
@@ -57,4 +57,4 @@ $daftarProduk = $pdo->query("SELECT * FROM produk ORDER BY id DESC")->fetchAll(P
             </table>
             </div>
         </section>
-<?php include __DIR__ . '/../../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

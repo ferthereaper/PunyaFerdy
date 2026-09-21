@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require __DIR__ . '/../../includes/koneksi.php';
+require __DIR__ . '/../includes/koneksi.php';
 
 $namaProduk = trim($_POST['nama_produk'] ?? '');
 $kategori   = trim($_POST['kategori'] ?? '');
