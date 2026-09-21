@@ -2,9 +2,15 @@
   "functions": {
     "index.php": { "runtime": "vercel-php@0.7.2" },
     "reset_session.php": { "runtime": "vercel-php@0.7.2" },
-    "pelanggan/*.php": { "runtime": "vercel-php@0.7.2" },
-    "produk/*.php": { "runtime": "vercel-php@0.7.2" },
-    "pesanan/*.php": { "runtime": "vercel-php@0.7.2" }
+    "pelanggan/list.php": { "runtime": "vercel-php@0.7.2" },
+    "pelanggan/tambah.php": { "runtime": "vercel-php@0.7.2" },
+    "pelanggan/proses_tambah.php": { "runtime": "vercel-php@0.7.2" },
+    "produk/list.php": { "runtime": "vercel-php@0.7.2" },
+    "produk/tambah.php": { "runtime": "vercel-php@0.7.2" },
+    "produk/proses_tambah.php": { "runtime": "vercel-php@0.7.2" },
+    "pesanan/list.php": { "runtime": "vercel-php@0.7.2" },
+    "pesanan/tambah.php": { "runtime": "vercel-php@0.7.2" },
+    "pesanan/proses_tambah.php": { "runtime": "vercel-php@0.7.2" }
   },
   "routes": [
     {
