@@ -1,191 +1,305 @@
 /* ==========================================
-   PALET WARNA CAIYO (MINIMALIS & MODERN)
+   PALET WARNA CAIYO (STRAWBERRY GLAZE / PINK)
    ========================================== */
-:root {
-    --primary: #d81b60;          /* Pink Stroberi / Caiyo Pink */
-    --primary-hover: #c2185b;    /* Pink Gelap untuk Hover */
-    --secondary: #fce4ec;        /* Soft Pink Muda untuk Accent/Background Card */
-    --bg-main: #fcf8f9;          /* Background Utama Halaman */
-    --card-bg: #ffffff;          /* Background Kartu / Konten */
-    --text-color: #2c2c2c;       /* Warna Teks Utama */
-    --text-muted: #757575;       /* Teks Sekunder */
-    --border-color: #f8bbd0;     /* Border Pink Lembut */
-    --radius: 12px;              /* Sudut Membulat Modern */
-}
 
-/* Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: var(--bg-main);
-    color: var(--text-color);
-    line-height: 1.6;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #2c2c2c;
+    background-color: #fcf8f9; /* Soft Pink tint untuk latar belakang */
+    line-height: 1.5;
 }
 
-/* Header & Navigation */
+a {
+    color: #d81b60; /* Caiyo Strawberry Pink */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 header {
-    background-color: var(--primary);
-    color: #ffffff;
-    padding: 1rem 2rem;
+    /* UBAH DARI #9b4809 KELUARAN CAIYO PINK */
+    background-color: #d81b60;
+    color: #fff;
+    padding: 1rem 1.5rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.15);
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(216, 27, 96, 0.15);
 }
 
-header h1, header h2 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+header h1 {
+    font-size: 1.4rem;
 }
 
-/* Layout / Container */
-section {
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;
+}
+
+header nav a {
+    color: #fff;
+    font-weight: 500;
+}
+
+main {
     max-width: 1000px;
     margin: 2rem auto;
-    padding: 1.5rem;
+    padding: 0 1.5rem;
 }
 
-/* Card Modern Minimalis */
-.card, section > div, table, form {
-    background: var(--card-bg);
-    border-radius: var(--radius);
+section {
+    background-color: #fff;
+    border-radius: 12px; /* Sudut lebih lembut dan modern */
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid #f8bbd0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
-h2 {
-    color: var(--primary);
+section h2 {
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    color: #d81b60;
 }
 
-/* Grid Dashboard Ringkasan */
-.dashboard-grid {
+/* LATIHAN 2 JS 2 */
+main section:nth-of-type(2) {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
 }
 
-.summary-card {
-    background-color: var(--secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    padding: 1.5rem;
+main section:nth-of-type(2) article {
+    background-color: #fce4ec; /* Soft Pink pastel untuk ringkasan/dashboard */
+    border: 1px solid #f8bbd0;
+    border-radius: 10px;
+    padding: 1.25rem;
     text-align: center;
     transition: transform 0.2s ease;
 }
 
-.summary-card:hover {
-    transform: translateY(-3px);
+main section:nth-of-type(2) article:hover {
+    transform: translateY(-2px);
 }
 
-.summary-card h3 {
+main section:nth-of-type(2) article h3 {
     font-size: 0.95rem;
-    color: var(--text-muted);
+    color: #757575;
     margin-bottom: 0.5rem;
 }
 
-.summary-card .number {
-    font-size: 2.2rem;
-    font-weight: bold;
-    color: var(--primary);
-}
-
-/* Table Styling */
-.table-responsive {
-    overflow-x: auto;
-    border-radius: var(--radius);
+main section:nth-of-type(2) article p {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #d81b60;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    overflow: hidden;
-    padding: 0;
 }
 
-th {
-    background-color: var(--primary);
-    color: #ffffff;
-    text-align: left;
-    padding: 1rem;
-    font-weight: 600;
-}
-
-td {
-    padding: 0.9rem 1rem;
-    border-bottom: 1px solid #f8bbd0;
-    color: var(--text-color);
-}
-
-tr:hover {
-    background-color: #fffeef;
-}
-
-/* Form & Input */
-input[type="text"],
-input[type="number"],
-input[type="email"],
-textarea,
-select {
+.table-responsive {
     width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1.5px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 0.95rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid #f8bbd0;
+}
+
+thead {
+    background-color: #d81b60;
+    color: #fff;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fcf0f4;
+}
+
+tbody tr:hover {
+    background-color: #fce4ec;
+}
+
+/* Tombol Aksi di Tabel & Link Bergaya Tombol */
+td button, td a.btn, td a.btn-hapus {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    margin-right: 0.35rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Tombol Edit / General Button */
+td button, td a.btn, td button.button-edit {
+    background-color: #f0ad4e;
+    color: #fff;
+}
+
+td button.button-detail {
+    background-color: #d5d4d4;
+    color: #333;
+}
+
+/* Tombol Hapus */
+td button.button-hapus, td a.btn-hapus {
+    background-color: #e53935;
+    color: #fff;
+}
+
+form p {
+    margin-bottom: 1rem;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+    color: #444;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid #f8bbd0;
+    border-radius: 6px;
+    font-size: 1rem;
     outline: none;
     transition: border-color 0.2s;
-    background-color: #fff;
 }
 
-input:focus, textarea:focus, select:focus {
-    border-color: var(--primary);
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: #d81b60;
     box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.1);
 }
 
-/* Button Styling */
-button, .btn {
-    display: inline-block;
-    background-color: var(--primary);
-    color: white;
-    padding: 0.6rem 1.2rem;
+form button[type="submit"] {
+    background-color: #d81b60;
+    color: #fff;
     border: none;
-    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
     font-weight: 600;
-    text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background-color 0.2s;
 }
 
-button:hover, .btn:hover {
-    background-color: var(--primary-hover);
+form button[type="submit"]:hover {
+    background-color: #c2185b;
 }
 
-.btn-hapus {
-    background-color: #e53935;
-    color: white;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
+footer {
+    text-align: center;
+    padding: 1.25rem;
+    color: #888;
+    font-size: 0.9rem;
 }
 
-.btn-hapus:hover {
-    background-color: #c62828;
+main section:nth-of-type(2) h2 {
+    grid-column: 1 / -1;
+}
+
+/** Jobsheet 3 */
+.nav-toggle-label {
+    display: none;
+    font-size: 1.6rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* JS3 Latihan 1 */
+@media (min-width: 1400px) {
+    main {
+        max-width: 1300px;
+    }
+}
+
+/* JS3 Latihan 2 */
+@media (max-width: 900px) {
+    main section:nth-of-type(2) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 780px) {
+    header {
+        position: relative;
+    }
+
+    .nav-toggle-label {
+        display: block;
+    }
+
+    header nav {
+        width: 100%;
+        order: 3;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out, margin-top 0.3s ease-in-out;
+        margin-top: 1rem;
+    }
+
+    /* JS 5 */
+    header nav.nav-open {
+        max-height: 300px;
+        margin-top: 1rem;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    main section:nth-of-type(2) {
+        grid-template-columns: 1fr;
+    }
+
+    form input,
+    form select,
+    form textarea {
+        max-width: 100%;
+    }
+}
+
+.search-box {
+    margin-bottom: 1rem;
+}
+
+.search-box input {
+    width: 100%;
+    max-width: 320px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #f8bbd0;
+    border-radius: 6px;
 }
 
 /* Flash Messages */
 .flash {
-    padding: 0.9rem 1.2rem;
-    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
     margin-bottom: 1rem;
     font-weight: 500;
 }
@@ -200,4 +314,15 @@ button:hover, .btn:hover {
     background-color: #ffebee;
     color: #c62828;
     border: 1px solid #ffcdd2;
+}
+
+/* JS3 Latihan 3 */
+pre {
+    max-width: 100%;
+    overflow-x: auto;
+    background-color: #2d3748;
+    color: #edf2f7;
+    padding: 1rem;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
 }
