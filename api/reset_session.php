@@ -2,7 +2,7 @@
 session_start();
 
 // 1. Sertakan koneksi database
-require_once 'koneksi.php'; // Sesuaikan dengan nama file koneksi kamu
+require_once '/../koneksi.php'; // Sesuaikan dengan nama file koneksi kamu
 
 // 2. Hapus seluruh data buku dari tabel database
 $query = "TRUNCATE TABLE buku"; // Atau "DELETE FROM buku" jika ada relasi Foreign Key
