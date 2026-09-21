@@ -3,8 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $page_title = "Beranda";
-include __DIR__ . '/includes/header.php';
-require __DIR__ . '/includes/koneksi.php';
+require_once __DIR__ . '/../includes/koneksi.php';
+include_once __DIR__ . '/../includes/header.php';
 
 $totalProduk = $pdo->query("SELECT COUNT(*) FROM produk")->fetchColumn();
 $totalPelanggan = $pdo->query("SELECT COUNT(*) FROM pelanggan")->fetchColumn();
@@ -31,4 +31,4 @@ $totalPelanggan = $pdo->query("SELECT COUNT(*) FROM pelanggan")->fetchColumn();
     </article>
 </section>
 
-<?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

@@ -3,8 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $page_title = "Daftar Pelanggan";
-include __DIR__ . '/../includes/header.php';
-require __DIR__ . '/../includes/koneksi.php';
+require_once __DIR__ . '/../../includes/koneksi.php';
+include_once __DIR__ . '/../../includes/header.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
@@ -58,4 +58,4 @@ $daftarPelanggan = $pdo->query("SELECT * FROM pelanggan ORDER BY id DESC")->fetc
             </table>
             </div>
         </section>
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>

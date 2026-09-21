@@ -4,8 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $page_title = "Tambah Pesanan";
-require __DIR__ . '/../includes/koneksi.php';
-include __DIR__ . '/../includes/header.php';
+require __DIR__ . '/../../includes/koneksi.php';
+include __DIR__ . '/../../includes/header.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
@@ -47,4 +47,4 @@ $daftarPelanggan = $pdo->query("SELECT id, nama FROM pelanggan ORDER BY nama ASC
                 </p>
             </form>
         </section>
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>
