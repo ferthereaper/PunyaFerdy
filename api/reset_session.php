@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: ../index.php');
+    exit;
+}
 // 1. Sertakan koneksi database
 require_once __DIR__ . '/../includes/koneksi.php';
 
