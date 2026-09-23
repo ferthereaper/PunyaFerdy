@@ -1,48 +1,21 @@
 {
   "functions": {
-    "WebUMKM/**/*.php": {
-      "runtime": "vercel-php@0.7.2"
-    },
-    "Jobsheet-*/**/*.php": {
+    "api/index.php": {
       "runtime": "vercel-php@0.7.2"
     }
   },
   "routes": [
     {
-      "src": "/WebUMKM/?$",
-      "dest": "/WebUMKM/index.php"
+      "src": "/style.css",
+      "dest": "/style.css"
     },
     {
-      "src": "/WebUMKM/(.*)",
-      "dest": "/WebUMKM/$1"
+      "src": "/index.html",
+      "dest": "/index.html"
     },
     {
-      "src": "/Jobsheet-01/(.*)",
-      "dest": "/Jobsheet-01/$1"
-    },
-    {
-      "src": "/Jobsheet-02/(.*)",
-      "dest": "/Jobsheet-02/$1"
-    },
-    {
-      "src": "/Jobsheet-03/(.*)",
-      "dest": "/Jobsheet-03/$1"
-    },
-    {
-      "src": "/Jobsheet-04/(.*)",
-      "dest": "/Jobsheet-04/$1"
-    },
-    {
-      "src": "/Jobsheet-05/(.*)",
-      "dest": "/Jobsheet-05/$1"
-    },
-    {
-      "src": "/Jobsheet-06/(.*)",
-      "dest": "/Jobsheet-06/$1"
-    },
-    {
-      "src": "/Jobsheet-07/(.*)",
-      "dest": "/Jobsheet-07/$1"
+      "src": "/(.*)",
+      "dest": "/api/index.php"
     }
   ]
 }
