@@ -10,20 +10,18 @@ function initNavToggle() {
 
 function initHapusConfirm() {
     document.addEventListener("click", function (e) {
-        console.log("Elemen yang diklik:", e.target);
-        
-        const btn = e.target.closest(".button-hapus");
+        const btn = e.target.closest(".button-hapus, .btn-hapus");
         if (!btn) return;
 
-        const row = btn.closest("tr");
-        const nama = row ? row.querySelector("td")?.textContent : "data ini";
-        const yakin = confirm("Yakin ingin menghapus \"" + nama + "\"?");
-        if (yakin && row) {
-            row.remove();
+        // Jika tombol sudah memiliki atribut onclick confirm bawaan HTML, biarkan browser menanganinya
+        if (btn.hasAttribute("onclick")) return;
 
-            if (typeof updateCounter === "function") {
-                updateCounter();
-            }
+        const row = btn.closest("tr");
+        const nama = row ? row.querySelector("td")?.textContent.trim() : "data ini";
+        const yakin = confirm("Yakin ingin menghapus \"" + nama + "\"?");
+        
+        if (!yakin) {
+            e.preventDefault();
         }
     });
 }
@@ -47,6 +45,10 @@ function tampilkanError(input, pesan) {
     hapusError(input);
     const span = document.createElement("span");
     span.className = "error";
+    span.style.color = "red";
+    span.style.fontSize = "0.85rem";
+    span.style.display = "block";
+    span.style.marginTop = "0.25rem";
     span.textContent = pesan;
     input.insertAdjacentElement("afterend", span);
 }
@@ -109,7 +111,7 @@ function initValidasiForm() {
     });
 }
 
-// JS 6 Latihan 2
+// Fungsi AJAX untuk memuat data tabel secara dinamis
 async function muatDataTabel(urlJson, selectorTbody, renderCallback) {
     const tbody = document.querySelector(selectorTbody);
     const loading = document.getElementById("loading-indicator");
@@ -122,8 +124,8 @@ async function muatDataTabel(urlJson, selectorTbody, renderCallback) {
         const response = await fetch(urlJson);
         const data = await response.json();
 
-        // Simulasi jeda / delay
-        await new Promise(resolve => setTimeout(resolve, 600));
+        // Simulasi delay singkat
+        await new Promise(resolve => setTimeout(resolve, 300));
 
         renderCallback(data, tbody);
     } catch (error) {
@@ -133,6 +135,7 @@ async function muatDataTabel(urlJson, selectorTbody, renderCallback) {
     }
 }
 
+// Inisialisasi seluruh fitur JavaScript saat DOM siap
 document.addEventListener("DOMContentLoaded", function () {
     initNavToggle();
     initHapusConfirm();

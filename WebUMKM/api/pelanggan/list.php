@@ -16,7 +16,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id']))
         'pesan' => 'Data pelanggan berhasil dihapus!'
     ];
 
-    header("Location: /pelanggan/list.php");
+    // FIX 1: Ubah redirect agar kembali ke path yang benar di Vercel
+    header("Location: /WebUMKM/api/pelanggan/list.php");
     exit;
 }
 
@@ -65,8 +66,9 @@ $daftarPelanggan = $pdo->query("SELECT * FROM pelanggan ORDER BY id DESC")->fetc
                             <td><?php echo htmlspecialchars($pelanggan['no_hp'] ?? '-'); ?></td>
                             <td><?php echo htmlspecialchars($pelanggan['alamat'] ?? '-'); ?></td>
                             <td>
-                                <a href="/pelanggan/tambah.php?id=<?php echo $pelanggan['id']; ?>" class="btn">Edit</a>
-                                <a href="/pelanggan/list.php?action=hapus&id=<?php echo $pelanggan['id']; ?>" 
+                                <!-- FIX 2: Sesuaikan path tombol Edit & Hapus -->
+                                <a href="/WebUMKM/api/pelanggan/tambah.php?id=<?php echo $pelanggan['id']; ?>" class="btn">Edit</a>
+                                <a href="/WebUMKM/api/pelanggan/list.php?action=hapus&id=<?php echo $pelanggan['id']; ?>" 
                                    class="btn-hapus" 
                                    onclick="return confirm('Apakah Anda yakin ingin menghapus pelanggan ini?')">Hapus</a>
                             </td>
