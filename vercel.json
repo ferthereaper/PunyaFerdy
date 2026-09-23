@@ -1,21 +1,24 @@
 {
-  "functions": {
-    "api/**/*.php": {
-      "runtime": "vercel-php@0.7.2"
-    }
-  },
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
       "src": "/",
-      "dest": "/api/index.php"
+      "dest": "/index.html"
     },
     {
-      "src": "/(.*)",
-      "dest": "/api/$1"
+      "src": "/style.css",
+      "dest": "/style.css"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/WebUMKM/api/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/WebUMKM/assets/$1"
+    },
+    {
+      "src": "/includes/(.*)",
+      "dest": "/WebUMKM/includes/$1"
     }
   ]
 }
