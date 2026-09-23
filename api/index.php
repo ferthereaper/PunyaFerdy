@@ -38,10 +38,10 @@ if (file_exists($filePath)) {
         require $filePath;
         exit;
     } else {
-        $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+        $ext = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
         $mimeTypes = [
-            'css'  => 'text/css',
-            'js'   => 'application/javascript',
+            'css'  => 'text/css; charset=utf-8',
+            'js'   => 'application/javascript; charset=utf-8',
             'png'  => 'image/png',
             'jpg'  => 'image/jpeg',
             'jpeg' => 'image/jpeg',
