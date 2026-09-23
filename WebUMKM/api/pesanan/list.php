@@ -16,7 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id']))
         'pesan' => 'Data pesanan berhasil dihapus!'
     ];
 
-    header("Location: /pesanan/list.php");
+    header("Location: /WebUMKM/api/pesanan/list.php");
     exit;
 }
 
