@@ -10,7 +10,13 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    /* Mengganti background dengan gambar */
+    background-image: url('/images/wpp_anya.jpg'); /* Sesuaikan lokasi/path file gambar kamu */
+    background-size: cover;          /* Memastikan gambar menutupi seluruh layar */
+    background-position: center;     /* Memposisikan gambar di tengah */
+    background-repeat: no-repeat;    /* Mencegah gambar berulang */
+    background-attachment: fixed;    /* Membuat gambar tidak ikut bergerak saat di-scroll */
+    
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
