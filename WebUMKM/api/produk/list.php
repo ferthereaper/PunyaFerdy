@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require __DIR__ . '/../../includes/koneksi.php';
 
-// === 1. TAMBAHAN LOGIKA HAPUS DATA DI SINI ===
+// Logika Hapus Produk
 if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id'])) {
     $id = (int)$_GET['id'];
     $stmt = $pdo->prepare("DELETE FROM produk WHERE id = ?");
@@ -16,8 +16,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id']))
         'pesan' => 'Data produk berhasil dihapus!'
     ];
 
-    // Redirect kembali ke halaman list agar URL bersih
-    header("Location: /produk/list.php");
+    // Ubah ke path lengkap
+    header("Location: /WebUMKM/api/produk/list.php");
     exit;
 }
 
@@ -38,7 +38,7 @@ $daftarProduk = $pdo->query("SELECT * FROM produk ORDER BY id DESC")->fetchAll(P
     <?php endif; ?>
 
     <div class="search-box">
-        <label for="search-input">Cari Nama Produk</label>
+        <label for="search-input">Cari Produk</label>
         <input type="text" id="search-input" placeholder="Ketik nama produk...">
     </div>
 
@@ -47,7 +47,6 @@ $daftarProduk = $pdo->query("SELECT * FROM produk ORDER BY id DESC")->fetchAll(P
             <thead>
                 <tr>
                     <th>Nama Produk</th>
-                    <th>Kategori</th>
                     <th>Harga</th>
                     <th>Stok</th>
                     <th>Aksi</th>
@@ -56,19 +55,18 @@ $daftarProduk = $pdo->query("SELECT * FROM produk ORDER BY id DESC")->fetchAll(P
             <tbody>
                 <?php if (empty($daftarProduk)): ?>
                     <tr>
-                        <td colspan="5">Belum ada data produk. Silakan tambah lewat menu "Tambah Produk".</td>
+                        <td colspan="4">Belum ada data produk.</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($daftarProduk as $produk): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($produk['nama_produk']); ?></td>
-                            <td><?php echo htmlspecialchars($produk['kategori'] ?? '-'); ?></td>
-                            <td>Rp <?php echo number_format($produk['harga'], 0, ',', '.'); ?></td>
-                            <td><?php echo $produk['stok']; ?></td>
+                            <td><?php echo htmlspecialchars($produk['nama'] ?? $produk['nama_produk']); ?></td>
+                            <td>Rp <?php echo number_format($produk['harga'] ?? 0, 0, ',', '.'); ?></td>
+                            <td><?php echo htmlspecialchars($produk['stok'] ?? 0); ?></td>
                             <td>
-                                <!-- === 2. PERUBAHAN TOMBOL AKSI DI SINI === -->
-                                <a href="/produk/tambah.php?id=<?php echo $produk['id']; ?>" class="btn">Edit</a>
-                                <a href="/produk/list.php?action=hapus&id=<?php echo $produk['id']; ?>" 
+                                <!-- Ubah link Edit & Hapus menggunakan path lengkap /WebUMKM/api/ -->
+                                <a href="/WebUMKM/api/produk/tambah.php?id=<?php echo $produk['id']; ?>" class="btn">Edit</a>
+                                <a href="/WebUMKM/api/produk/list.php?action=hapus&id=<?php echo $produk['id']; ?>" 
                                    class="btn-hapus" 
                                    onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</a>
                             </td>
