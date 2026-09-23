@@ -6,7 +6,12 @@
   },
   "routes": [
     {
-      "handle": "filesystem"
+      "src": "/style.css",
+      "dest": "/style.css"
+    },
+    {
+      "src": "/index.html",
+      "dest": "/index.html"
     },
     {
       "src": "/(.*)",

@@ -3,44 +3,54 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $rootDir = realpath(__DIR__ . '/..');
 $filePath = $rootDir . $uri;
 
-// Jika mengakses root "/", tampilkan index.html dari root
+// 1. Tampilkan index.html di root jika membuka "/"
 if ($uri === '/' || $uri === '') {
     $indexHtml = $rootDir . '/index.html';
     if (file_exists($indexHtml)) {
-        header("Content-Type: text/html");
+        header("Content-Type: text/html; charset=utf-8");
         readfile($indexHtml);
         exit;
     }
 }
 
-// Jika mengakses file langsung
-if (file_exists($filePath) && !is_dir($filePath)) {
-    if (str_ends_with($filePath, '.php')) {
-        chdir(dirname($filePath));
-        require $filePath;
-        exit;
-    } else {
-        $mime = mime_content_type($filePath);
-        if (str_ends_with($filePath, '.css')) $mime = 'text/css';
-        if (str_ends_with($filePath, '.js')) $mime = 'application/javascript';
-        header("Content-Type: $mime");
-        readfile($filePath);
-        exit;
-    }
-}
-
-// Jika mengakses direktori (misal /WebUMKM atau /Jobsheet-01), cari index.php/index.html
+// 2. Jika mengakses folder (seperti /WebUMKM atau /Jobsheet-01)
 if (is_dir($filePath)) {
     $dirIndexPhp = rtrim($filePath, '/') . '/index.php';
     $dirIndexHtml = rtrim($filePath, '/') . '/index.html';
 
     if (file_exists($dirIndexPhp)) {
         chdir(dirname($dirIndexPhp));
+        header("Content-Type: text/html; charset=utf-8");
         require $dirIndexPhp;
         exit;
     } elseif (file_exists($dirIndexHtml)) {
-        header("Content-Type: text/html");
+        header("Content-Type: text/html; charset=utf-8");
         readfile($dirIndexHtml);
+        exit;
+    }
+}
+
+// 3. Jika mengakses file langsung (.php, .css, .js, .png, dll)
+if (file_exists($filePath)) {
+    if (str_ends_with($filePath, '.php')) {
+        chdir(dirname($filePath));
+        header("Content-Type: text/html; charset=utf-8");
+        require $filePath;
+        exit;
+    } else {
+        $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+        $mimeTypes = [
+            'css'  => 'text/css',
+            'js'   => 'application/javascript',
+            'png'  => 'image/png',
+            'jpg'  => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'svg'  => 'image/svg+xml',
+            'json' => 'application/json'
+        ];
+        $mime = $mimeTypes[$ext] ?? mime_content_type($filePath);
+        header("Content-Type: $mime");
+        readfile($filePath);
         exit;
     }
 }
