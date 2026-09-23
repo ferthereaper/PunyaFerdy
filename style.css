@@ -1,21 +1,21 @@
 :root {
-    --bg-color: #0f172a;
-    --card-bg: #1e293b;
-    --card-hover: #334155;
-    --primary: #3b82f6;
-    --primary-hover: #60a5fa;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent: #10b981;
+    --bg-color: #fce7f3;
+    --card-bg: rgba(255, 255, 255, 0.82);
+    --card-hover: rgba(255, 255, 255, 0.95);
+    --primary: #e11d48;
+    --primary-hover: #be123c;
+    --text-main: #2e1065;
+    --text-muted: #6b21a8;
+    --accent: #ec4899;
 }
 
 body {
-    /* Mengganti background dengan gambar */
-    background-image: url('/images/wpp_anya.jpg'); /* Sesuaikan lokasi/path file gambar kamu */
-    background-size: cover;          /* Memastikan gambar menutupi seluruh layar */
-    background-position: center;     /* Memposisikan gambar di tengah */
-    background-repeat: no-repeat;    /* Mencegah gambar berulang */
-    background-attachment: fixed;    /* Membuat gambar tidak ikut bergerak saat di-scroll */
+    /* Background gambar */
+    background-image: url('/images/wpp_anya.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     
     color: var(--text-main);
     min-height: 100vh;
@@ -30,27 +30,30 @@ body {
 /* Styling Header Mahasiswa */
 .header-mahasiswa {
     background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     width: 100%;
     max-width: 400px;
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 16px;
     text-align: center;
     margin-bottom: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.15);
 }
 
 .header-mahasiswa h1 {
     margin: 0;
     font-size: 1.5rem;
     color: var(--text-main);
+    font-weight: 700;
 }
 
 .header-mahasiswa .info {
     margin-top: 0.5rem;
     margin-bottom: 0;
-    color: var(--primary-hover);
-    font-weight: 500;
+    color: var(--primary);
+    font-weight: 600;
     font-size: 0.95rem;
 }
 
@@ -65,21 +68,28 @@ body {
 
 .card {
     background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    transition: background-color 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.1);
+    transition: all 0.3s ease;
 }
 
 .card:hover {
     background-color: var(--card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(225, 29, 72, 0.2);
 }
 
 .card h2 {
     margin: 0;
     font-size: 1.3rem;
+    color: var(--text-main);
 }
 
 .card p {
@@ -93,13 +103,15 @@ body {
     text-align: center;
     background-color: var(--primary);
     color: white;
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
+    padding: 0.65rem 1rem;
+    border-radius: 10px;
     text-decoration: none;
     font-weight: 600;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
 }
 
 .btn:hover {
     background-color: var(--primary-hover);
+    box-shadow: 0 6px 16px rgba(225, 29, 72, 0.4);
 }
