@@ -202,6 +202,23 @@ main section:nth-of-type(2) h2 {
     display: none;
 }
 
+.auth-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+}
+
+/* Memastikan teks link Login & Logout berwarna putih dan terlihat */
+.auth-status a {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+.auth-status a:hover {
+    color: #f0f0f0 !important;
+}
+
 .nav-toggle-label {
     display: none;
     font-size: 1.6rem;
