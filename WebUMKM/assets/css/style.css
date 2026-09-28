@@ -8,9 +8,7 @@
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     color: #2b2b2b;
-    /* Ganti lokasi gambar sesuai file Anda */
-    background: url('../images/bg-wallpaper.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background-color: #fcf8f9; /* Latar lembut bernuansa pink */
     line-height: 1.5;
 }
 
