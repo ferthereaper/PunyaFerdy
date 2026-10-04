@@ -1,21 +1,3 @@
-CREATE TABLE IF NOT EXISTS buku (
-    id SERIAL PRIMARY KEY,
-    judul VARCHAR(255) NOT NULL,
-    pengarang VARCHAR(255) NOT NULL,
-    tahun INTEGER NOT NULL,
-    isbn VARCHAR(50),
-    stok INTEGER NOT NULL DEFAULT 0,
-    kategori VARCHAR(50)
-);
-
-CREATE TABLE IF NOT EXISTS anggota (
-    id SERIAL PRIMARY KEY,
-    nama VARCHAR(255) NOT NULL,
-    no_anggota VARCHAR(50) NOT NULL UNIQUE,
-    alamat VARCHAR(255),
-    no_hp VARCHAR(30)
-);
-
 -- 1. Buat Tabel Produk
 CREATE TABLE produk (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -44,4 +26,13 @@ CREATE TABLE pesanan (
     status VARCHAR(50) DEFAULT 'Diproses', -- Contoh status: 'Diproses', 'Selesai', 'Dibatalkan'
     total_harga NUMERIC(12, 2) DEFAULT 0,
     created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'petugas', 'pelanggan') DEFAULT 'petugas',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

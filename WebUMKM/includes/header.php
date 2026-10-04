@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -11,7 +16,7 @@
         <h1>Pemesanan UMKM</h1>
         <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
         <nav>
-           <ul>
+            <ul>
                 <li><a href="/WebUMKM/api/index.php">Beranda</a></li>
                 <li><a href="/WebUMKM/api/produk/list.php">Daftar Produk</a></li>
                 <li><a href="/WebUMKM/api/produk/tambah.php">Tambah Produk</a></li>
@@ -20,11 +25,17 @@
                 <li><a href="/WebUMKM/api/pesanan/list.php">Daftar Pesanan</a></li>
                 <li><a href="/WebUMKM/api/pesanan/tambah.php">Tambah Pesanan</a></li>
                 <li>
-                    <form action="/WebUMKM/api/reset_session.php" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin mereset seluruh data sementara?');">
-                        <button type="submit" style="background: none; border: none; color: #999999; font: inherit; cursor: pointer; padding: 0;">Reset Data</button>
+                    <form action="/WebUMKM/api/reset_session.php" method="POST" class="form-reset" onsubmit="return confirm('Apakah Anda yakin ingin mereset seluruh data sementara?');">
+                        <button type="submit" class="btn-reset">Reset Data</button>
                     </form>
                 </li>
             </ul>
+        </nav>
+
+        <!-- Elemen Navigasi User / Logout -->
+        <nav class="navbar">
+            <span>Halo, <?php echo htmlspecialchars($_SESSION['nama'] ?? 'Pengguna'); ?></span>
+            <a href="../auth/logout.php" class="btn-logout">Logout</a>
         </nav>
     </header>
 

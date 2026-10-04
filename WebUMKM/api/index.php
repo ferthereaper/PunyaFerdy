@@ -1,9 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-$page_title = "Beranda";
+require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/koneksi.php';
+
+query("SELECT COUNT(*) FROM produk")->fetchColumn();
+$totalPelanggan =$pdo->query("SELECT COUNT(*) FROM pelanggan")->fetchColumn();
+
+$page_title = "Beranda";
 include_once __DIR__ . '/../includes/header.php';
 
 $totalProduk = $pdo->query("SELECT COUNT(*) FROM produk")->fetchColumn();

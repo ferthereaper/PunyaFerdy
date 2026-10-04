@@ -258,6 +258,24 @@ footer {
     border-radius: 5px;
 }
 
+/* Style Form & Tombol Reset Data */
+.form-reset {
+    display: inline;
+}
+
+.btn-reset {
+    background: none;
+    border: none;
+    color: #999999;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn-reset:hover {
+    color: #ff4d4d;
+}
+
 /* ===== Responsive Breakpoints ===== */
 
 /* Tablet ke bawah */
