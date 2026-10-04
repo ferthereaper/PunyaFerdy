@@ -1,7 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../includes/session.php';
 require __DIR__ . '/../includes/koneksi.php';
 
 $username = trim($_POST['username'] ?? '');
