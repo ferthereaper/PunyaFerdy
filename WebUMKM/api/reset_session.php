@@ -7,31 +7,25 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || ($_SESSION['role'] ?? '') !== 'admi
 }
 require_once __DIR__ . '/../includes/koneksi.php';
 
-// 2. Hapus seluruh data tabel UMKM dari database menggunakan PDO
+// 1. Hapus seluruh data tabel UMKM.
+// CASCADE agar tabel yang saling berhubungan (pesanan -> pelanggan/produk) ikut direset.
 try {
-    // TRUNCATE CASCADE digunakan agar tabel yang saling berhubungan (pesanan ke pelanggan) bisa direset bersamaan
-    $query = "TRUNCATE TABLE pesanan, produk, pelanggan RESTART IDENTITY CASCADE";
-    $pdo->exec($query);
+    $pdo->exec("TRUNCATE TABLE pesanan, produk, pelanggan RESTART IDENTITY CASCADE");
 } catch (PDOException $e) {
-    die("Gagal menghapus data: " . $e->getMessage());
+    error_log('Reset data gagal: ' . $e->getMessage());
+    http_response_code(500);
+    exit('Gagal mereset data. Silakan coba lagi.');
 }
 
-// 3. Bersihkan data session
-$_SESSION = array();
-
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000,
-        $params["path"], $params["domain"],
-        $params["secure"], $params["httponly"]
-    );
-}
-
+// 2. Akhiri sesi lama, lalu buat sesi baru (ID baru) hanya untuk membawa pesan sukses
+$_SESSION = [];
 session_destroy();
-
-// 4. Buat session baru untuk pesan sukses
+session_id(session_create_id());
 session_start();
-$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Seluruh data session, produk, pelanggan, dan pesanan berhasil direset.'];
+$_SESSION['flash'] = [
+    'type'  => 'success',
+    'pesan' => 'Seluruh data produk, pelanggan, dan pesanan berhasil direset. Silakan login kembali.'
+];
 
-header('Location: index.php');
+header('Location: /WebUMKM/auth/login.php');
 exit;
