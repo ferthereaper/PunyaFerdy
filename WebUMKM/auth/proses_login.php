@@ -22,10 +22,7 @@ if ($user && password_verify($password,$user['password'])) {
     header("Location: ../api/index.php");
     exit();
 } else {
+    $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Username atau password salah.'];
     header("Location: login.php?error=invalid");
     exit();
 }
-
-$_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Username atau password salah.'];
-header('Location: login.php');
-exit;
