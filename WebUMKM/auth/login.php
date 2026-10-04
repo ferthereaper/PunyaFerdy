@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/session.php';
-if (isset($_SESSION['user_id'])) {
+if (!empty($_SESSION['user_id']) && ($_SESSION['logged_in'] ?? false) === true) {
     header('Location: /WebUMKM/api/index.php');
     exit;
 }
