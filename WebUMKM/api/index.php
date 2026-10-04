@@ -2,9 +2,6 @@
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/koneksi.php';
 
-query("SELECT * FROM nama_tabel");
-$data =$stmt->fetchAll(PDO::FETCH_ASSOC);
-
 $page_title = "Beranda";
 include_once __DIR__ . '/../includes/header.php';
 
