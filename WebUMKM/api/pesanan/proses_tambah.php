@@ -1,8 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../../includes/auth.php';   // sudah memulai session & mengecek login
 require __DIR__ . '/../../includes/koneksi.php';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: list.php');
+    exit;
+}
 
 $id          = $_POST['id'] ?? null;
 $idPelanggan = $_POST['id_pelanggan'] ?? '';

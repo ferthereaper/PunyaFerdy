@@ -1,11 +1,10 @@
 <?php
-session_start();
+require_once __DIR__ . '/../includes/auth.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../index.php');
-    exit;
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || ($_SESSION['role'] ?? '') !== 'admin') {
+    http_response_code(403);
+    exit('Akses ditolak.');
 }
-// 1. Sertakan koneksi database
 require_once __DIR__ . '/../includes/koneksi.php';
 
 // 2. Hapus seluruh data tabel UMKM dari database menggunakan PDO

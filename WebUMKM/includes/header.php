@@ -35,7 +35,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <!-- Elemen Navigasi User / Logout -->
         <nav class="navbar">
             <span>Halo, <?php echo htmlspecialchars($_SESSION['nama'] ?? 'Pengguna'); ?></span>
-            <a href="../auth/logout.php" class="btn-logout">Logout</a>
+            <a href="/WebUMKM/auth/logout.php" class="btn-logout">Logout</a>
         </nav>
     </header>
 

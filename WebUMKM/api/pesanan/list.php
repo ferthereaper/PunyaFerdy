@@ -69,10 +69,10 @@ $daftarPesanan = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo $pesanan['jumlah']; ?></td>
                             <td>Rp <?php echo number_format($pesanan['total_harga'], 0, ',', '.'); ?></td>
                             <td>
-                                <a href="/pesanan/tambah.php?id=<?php echo $pesanan['id']; ?>" class="btn">Edit</a>
-                                <a href="/pesanan/list.php?action=hapus&id=<?php echo $pesanan['id']; ?>" 
-                                   class="btn-hapus" 
-                                   onclick="return confirm('Apakah Anda yakin ingin menghapus pesanan ini?')">Hapus</a>
+                                <a href="/WebUMKM/api/pesanan/tambah.php?id=<?php echo $pesanan['id']; ?>" class="btn">Edit</a>
+                                <a href="/WebUMKM/api/pesanan/list.php?action=hapus&id=<?php echo $pesanan['id']; ?>"
+                                class="btn-hapus"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus pesanan ini?')">Hapus</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

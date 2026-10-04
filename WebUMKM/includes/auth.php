@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Cek apakah session user/login sudah ada
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: ../auth/login.php");
+    header("Location: /WebUMKM/auth/login.php");
     exit();
 }
 ?>
