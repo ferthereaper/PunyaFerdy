@@ -276,6 +276,85 @@ footer {
     color: #ff4d4d;
 }
 
+/* ===== Info User & Logout di Header ===== */
+header {
+    row-gap: 0.75rem;
+}
+
+/* Baris 1: judul di kiri, info user di kanan. Baris 2: menu. */
+header h1 {
+    order: 1;
+    margin-right: auto;
+}
+
+header nav.navbar {
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+header nav:not(.navbar) {
+    order: 3;
+    width: 100%;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Menu yang panjang turun ke baris berikutnya, tidak meluber */
+header nav ul {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+}
+
+.navbar span {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.95rem;
+}
+
+/* Titik hijau penanda sudah login */
+.navbar span::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background-color: #a5d6a7;
+}
+
+.btn-logout {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 999px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+header .navbar .btn-logout:hover {
+    background-color: #fff;
+    color: #d81b60;
+    text-decoration: none;
+}
+
+header .navbar .btn-logout:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+}
+
+/* Animasi menu mobile (sebelumnya dipanggil tapi belum didefinisikan) */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ===== Responsive Breakpoints ===== */
 
 /* Tablet ke bawah */
@@ -320,5 +399,20 @@ footer {
     form select,
     form textarea {
         max-width: 100%;
+    }
+
+        /* Baris 1: judul + tombol ☰. Baris 2: info user. Baris 3: menu. */
+    .nav-toggle-label {
+        order: 2;
+    }
+
+    header nav.navbar {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    header nav:not(.navbar) {
+        order: 4;
     }
 }
