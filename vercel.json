@@ -1,20 +1,39 @@
+
 {
   "functions": {
-    "api/index.php": {
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.7.2"
+    },
+    "Jobsheet-11/**/*.php": {
+      "runtime": "vercel-php@0.7.2"
+    },
+    "Jobsheet-12/**/*.php": {
       "runtime": "vercel-php@0.7.2"
     }
   },
   "routes": [
     {
-      "src": "/style.css",
+      "src": "^/style\\.css$",
       "dest": "/style.css"
     },
     {
-      "src": "/index.html",
+      "src": "^/Jobsheet-11/(.*)$",
+      "dest": "/Jobsheet-11/$1"
+    },
+    {
+      "src": "^/Jobsheet-12/(.*)$",
+      "dest": "/Jobsheet-12/$1"
+    },
+    {
+      "src": "^/WebUMKM/(.*)$",
+      "dest": "/WebUMKM/$1"
+    },
+    {
+      "src": "^/$",
       "dest": "/index.html"
     },
     {
-      "src": "/(.*)",
+      "src": "^/(.*)$",
       "dest": "/api/index.php"
     }
   ]
