@@ -16,7 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id']))
     ];
 
     // FIX 1: Ubah redirect agar kembali ke path yang benar di Vercel
-    header("Location: /PunyaFerdy/Jobsheet-11/api/pelanggan/list.php");
+    header('Location: ' . BASE_URL . '/api/pelanggan/list.php');
     exit;
 }
 
@@ -66,8 +66,8 @@ $daftarPelanggan = $pdo->query("SELECT * FROM pelanggan ORDER BY id DESC")->fetc
                             <td><?php echo htmlspecialchars($pelanggan['alamat'] ?? '-'); ?></td>
                             <td>
                                 <!-- FIX 2: Sesuaikan path tombol Edit & Hapus -->
-                                <a href="/PunyaFerdy/Jobsheet-11/api/pelanggan/tambah.php?id=<?php echo $pelanggan['id']; ?>" class="btn">Edit</a>
-                                <a href="/PunyaFerdy/Jobsheet-11/api/pelanggan/list.php?action=hapus&id=<?php echo $pelanggan['id']; ?>" 
+                                <a href="<?php echo BASE_URL; ?>/api/pelanggan/tambah.php?id=<?php echo $pelanggan['id']; ?>" class="btn">Edit</a>
+                                <a href="<?php echo BASE_URL; ?>/api/pelanggan/list.php?action=hapus&id=<?php echo $pelanggan['id']; ?>" 
                                    class="btn-hapus" 
                                    onclick="return confirm('Apakah Anda yakin ingin menghapus pelanggan ini?')">Hapus</a>
                             </td>

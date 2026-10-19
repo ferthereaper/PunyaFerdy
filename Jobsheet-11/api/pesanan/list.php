@@ -15,7 +15,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id']))
         'pesan' => 'Data pesanan berhasil dihapus!'
     ];
 
-    header("Location: /PunyaFerdy/Jobsheet-11/api/pesanan/list.php");
+    header('Location: ' . BASE_URL . '/api/pesanan/list.php');
     exit;
 }
 
@@ -67,8 +67,8 @@ $daftarPesanan = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo $pesanan['jumlah']; ?></td>
                             <td>Rp <?php echo number_format($pesanan['total_harga'], 0, ',', '.'); ?></td>
                             <td>
-                                <a href="/PunyaFerdy/Jobsheet-11/api/pesanan/tambah.php?id=<?php echo $pesanan['id']; ?>" class="btn">Edit</a>
-                                <a href="/PunyaFerdy/Jobsheet-11/api/pesanan/list.php?action=hapus&id=<?php echo $pesanan['id']; ?>"
+                                <a href="<?php echo BASE_URL; ?>/api/pesanan/tambah.php?id=<?php echo $pesanan['id']; ?>" class="btn">Edit</a>
+                                <a href="<?php echo BASE_URL; ?>/api/pesanan/list.php?action=hapus&id=<?php echo $pesanan['id']; ?>"
                                 class="btn-hapus"
                                 onclick="return confirm('Apakah Anda yakin ingin menghapus pesanan ini?')">Hapus</a>
                             </td>

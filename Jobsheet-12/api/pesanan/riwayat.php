@@ -35,7 +35,7 @@ if ($pelangganId !== false && $pelangganId > 0) {
     <h2>Riwayat Pesanan Pelanggan</h2>
 
     <div class="search-box">
-        <form method="get" action="/PunyaFerdy/Jobsheet-12/api/pesanan/riwayat.php">
+        <form method="get" action="<?php echo BASE_URL; ?>/api/pesanan/riwayat.php">
             <label for="pelanggan_id">Pilih Pelanggan</label>
             <select id="pelanggan_id" name="pelanggan_id" required>
                 <option value="">-- Pilih Pelanggan --</option>

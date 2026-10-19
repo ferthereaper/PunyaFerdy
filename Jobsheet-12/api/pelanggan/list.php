@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'hapus
     ];
 
     // FIX 1: Ubah redirect agar kembali ke path yang benar di Vercel
-    header("Location: /PunyaFerdy/Jobsheet-12/api/pelanggan/list.php");
+    header('Location: ' . BASE_URL . '/api/pelanggan/list.php');
     exit;
 }
 
@@ -68,8 +68,8 @@ $daftarPelanggan = $pdo->query("SELECT * FROM pelanggan ORDER BY id DESC")->fetc
                             <td><?php echo e($pelanggan['alamat'] ?? '-'); ?></td>
                             <td>
                                 <!-- FIX 2: Sesuaikan path tombol Edit & Hapus -->
-                                <a href="/PunyaFerdy/Jobsheet-12/api/pelanggan/tambah.php?id=<?php echo e($pelanggan['id']); ?>" class="btn">Edit</a>
-                                <form class="form-hapus" method="post" action="/PunyaFerdy/Jobsheet-12/api/pelanggan/list.php">
+                                <a href="<?php echo BASE_URL; ?>/api/pelanggan/tambah.php?id=<?php echo e($pelanggan['id']); ?>" class="btn">Edit</a>
+                                <form class="form-hapus" method="post" action="<?php echo BASE_URL; ?>/api/pelanggan/list.php">
                                     <?php echo csrf_field(); ?>
                                     <input type="hidden" name="action" value="hapus">
                                     <input type="hidden" name="id" value="<?php echo e($pelanggan['id']); ?>">

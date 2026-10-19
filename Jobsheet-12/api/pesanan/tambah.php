@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
         // Hanya pesanan yang masih diproses yang boleh diubah (stok sudah dipotong).
         if ($data['status'] !== 'diproses') {
             $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Hanya pesanan berstatus diproses yang bisa diubah.'];
-            header('Location: /PunyaFerdy/Jobsheet-12/api/pesanan/list.php');
+            header('Location: ' . BASE_URL . '/api/pesanan/list.php');
             exit;
         }
         $is_edit = true;

@@ -9,7 +9,7 @@ $isAdmin    = ($_SESSION['role'] ?? '') === 'admin';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pemesanan UMKM<?php echo isset($page_title) ? ' | ' . htmlspecialchars($page_title) : ''; ?></title>
-    <link rel="stylesheet" href="/PunyaFerdy/Jobsheet-11/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/style.css">
 </head>
 <body>
     <header>
@@ -19,16 +19,16 @@ $isAdmin    = ($_SESSION['role'] ?? '') === 'admin';
         <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
         <nav>
             <ul>
-                <li><a href="/PunyaFerdy/Jobsheet-11/api/index.php">Beranda</a></li>
-                <li><a href="/PunyaFerdy/Jobsheet-11/api/produk/list.php">Daftar Produk</a></li>
-                <li><a href="/PunyaFerdy/Jobsheet-11/api/produk/tambah.php">Tambah Produk</a></li>
-                <li><a href="/PunyaFerdy/Jobsheet-11/api/pelanggan/list.php">Daftar Pelanggan</a></li>
-                <li><a href="/PunyaFerdy/Jobsheet-11/api/pelanggan/tambah.php">Tambah Pelanggan</a></li>
-                <li><a href="/PunyaFerdy/Jobsheet-11/api/pesanan/list.php">Daftar Pesanan</a></li>
-                <li><a href="/PunyaFerdy/Jobsheet-11/api/pesanan/tambah.php">Tambah Pesanan</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/api/index.php">Beranda</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/api/produk/list.php">Daftar Produk</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/api/produk/tambah.php">Tambah Produk</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/api/pelanggan/list.php">Daftar Pelanggan</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/api/pelanggan/tambah.php">Tambah Pelanggan</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/api/pesanan/list.php">Daftar Pesanan</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/api/pesanan/tambah.php">Tambah Pesanan</a></li>
                 <?php if ($isAdmin): ?>
                 <li>
-                    <form action="/PunyaFerdy/Jobsheet-11/api/reset_session.php" method="POST" class="form-reset" onsubmit="return confirm('Apakah Anda yakin ingin mereset seluruh data?');">
+                    <form action="<?php echo BASE_URL; ?>/api/reset_session.php" method="POST" class="form-reset" onsubmit="return confirm('Apakah Anda yakin ingin mereset seluruh data?');">
                         <button type="submit" class="btn-reset">Reset Data</button>
                     </form>
                 </li>
@@ -39,7 +39,7 @@ $isAdmin    = ($_SESSION['role'] ?? '') === 'admin';
         <!-- Elemen Navigasi User / Logout -->
         <nav class="navbar">
             <span>Halo, <?php echo htmlspecialchars($_SESSION['nama'] ?? 'Pengguna'); ?></span>
-            <a href="/PunyaFerdy/Jobsheet-11/auth/logout.php" class="btn-logout">Logout</a>
+            <a href="<?php echo BASE_URL; ?>/auth/logout.php" class="btn-logout">Logout</a>
         </nav>
         <?php endif; ?>
     </header>

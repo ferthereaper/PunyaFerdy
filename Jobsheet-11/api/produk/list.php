@@ -16,7 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id']))
     ];
 
     // Ubah ke path lengkap
-    header("Location: /PunyaFerdy/Jobsheet-11/api/produk/list.php");
+    header('Location: ' . BASE_URL . '/api/produk/list.php');
     exit;
 }
 
@@ -63,9 +63,9 @@ $daftarProduk = $pdo->query("SELECT * FROM produk ORDER BY id DESC")->fetchAll(P
                             <td>Rp <?php echo number_format($produk['harga'] ?? 0, 0, ',', '.'); ?></td>
                             <td><?php echo htmlspecialchars($produk['stok'] ?? 0); ?></td>
                             <td>
-                                <!-- Ubah link Edit & Hapus menggunakan path lengkap /PunyaFerdy/Jobsheet-11/api/ -->
-                                <a href="/PunyaFerdy/Jobsheet-11/api/produk/tambah.php?id=<?php echo $produk['id']; ?>" class="btn">Edit</a>
-                                <a href="/PunyaFerdy/Jobsheet-11/api/produk/list.php?action=hapus&id=<?php echo $produk['id']; ?>" 
+                                <!-- Link memakai BASE_URL, jadi tidak bergantung pada nama folder -->
+                                <a href="<?php echo BASE_URL; ?>/api/produk/tambah.php?id=<?php echo $produk['id']; ?>" class="btn">Edit</a>
+                                <a href="<?php echo BASE_URL; ?>/api/produk/list.php?action=hapus&id=<?php echo $produk['id']; ?>" 
                                    class="btn-hapus" 
                                    onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</a>
                             </td>

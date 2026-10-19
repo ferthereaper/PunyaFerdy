@@ -19,12 +19,12 @@ Sebelum: ![before](images/xss-before.png)  Sesudah: ![after](images/xss-after.pn
 
 ## 2–3. CSRF (termasuk hapus via GET)
 Sebelum, dalam keadaan login, membuka link ini langsung menghapus data (cukup lewat `<img src>` di situs lain):
-`/PunyaFerdy/Jobsheet-12/api/produk/list.php?action=hapus&id=1`
+`/Jobsheet-12/api/produk/list.php?action=hapus&id=1`
 Sesudah: request yang sama tidak lagi menghapus, dan POST tanpa token mendapat 403.
 Sebelum: ![before](images/csrf-before.png)  Sesudah: ![after](images/csrf-after.png)
 
 ## 4. Reset Data
-Uji: kirim POST ke `/PunyaFerdy/Jobsheet-12/api/reset_session.php` tanpa token sebagai admin → 403 dan data tetap ada.
+Uji: kirim POST ke `/Jobsheet-12/api/reset_session.php` tanpa token sebagai admin → 403 dan data tetap ada.
 ![reset](images/reset-after.png)
 
 ## 5. Session fixation

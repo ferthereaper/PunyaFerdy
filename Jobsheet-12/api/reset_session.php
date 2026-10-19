@@ -31,5 +31,5 @@ $_SESSION['flash'] = [
     'pesan' => 'Seluruh data produk, pelanggan, dan pesanan berhasil direset. Silakan login kembali.'
 ];
 
-header('Location: /PunyaFerdy/Jobsheet-12/auth/login.php');
+header('Location: ' . BASE_URL . '/auth/login.php');
 exit;

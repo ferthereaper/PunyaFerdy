@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'hapus
         'pesan' => 'Data pesanan berhasil dihapus!'
     ];
 
-    header("Location: /PunyaFerdy/Jobsheet-12/api/pesanan/list.php");
+    header('Location: ' . BASE_URL . '/api/pesanan/list.php');
     exit;
 }
 
@@ -93,9 +93,9 @@ $daftarPesanan = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo e($pesanan['status']); ?></td>
                             <td>
                                 <?php if ($pesanan['status'] === 'diproses'): ?>
-                                    <a href="/PunyaFerdy/Jobsheet-12/api/pesanan/tambah.php?id=<?php echo e($pesanan['id']); ?>" class="btn">Edit</a>
+                                    <a href="<?php echo BASE_URL; ?>/api/pesanan/tambah.php?id=<?php echo e($pesanan['id']); ?>" class="btn">Edit</a>
                                 <?php endif; ?>
-                                <form class="form-hapus" method="post" action="/PunyaFerdy/Jobsheet-12/api/pesanan/list.php">
+                                <form class="form-hapus" method="post" action="<?php echo BASE_URL; ?>/api/pesanan/list.php">
                                     <?php echo csrf_field(); ?>
                                     <input type="hidden" name="action" value="hapus">
                                     <input type="hidden" name="id" value="<?php echo e($pesanan['id']); ?>">

@@ -55,13 +55,13 @@ $daftarAktif = $pdo->query(
                             <td>Rp <?php echo number_format($p['total_harga'], 0, ',', '.'); ?></td>
                             <td><?php echo $p['created_at'] ? e(date('d-m-Y H:i', strtotime($p['created_at']))) : '-'; ?></td>
                             <td>
-                                <form class="form-aksi" method="post" action="/PunyaFerdy/Jobsheet-12/api/pesanan/proses_status.php">
+                                <form class="form-aksi" method="post" action="<?php echo BASE_URL; ?>/api/pesanan/proses_status.php">
                                     <?php echo csrf_field(); ?>
                                     <input type="hidden" name="id" value="<?php echo e($p['id']); ?>">
                                     <input type="hidden" name="aksi" value="selesai">
                                     <button type="submit" class="btn-selesai" onclick="return confirm('Tandai pesanan ini selesai?')">Selesaikan</button>
                                 </form>
-                                <form class="form-aksi" method="post" action="/PunyaFerdy/Jobsheet-12/api/pesanan/proses_status.php">
+                                <form class="form-aksi" method="post" action="<?php echo BASE_URL; ?>/api/pesanan/proses_status.php">
                                     <?php echo csrf_field(); ?>
                                     <input type="hidden" name="id" value="<?php echo e($p['id']); ?>">
                                     <input type="hidden" name="aksi" value="batal">
