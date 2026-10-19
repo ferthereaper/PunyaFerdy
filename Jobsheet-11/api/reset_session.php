@@ -5,6 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || ($_SESSION['role'] ?? '') !== 'admi
     http_response_code(403);
     exit('Akses ditolak.');
 }
+require_once __DIR__ . '/../includes/csrf.php';
+csrf_verify();
 require_once __DIR__ . '/../includes/koneksi.php';
 
 // 1. Hapus seluruh data tabel UMKM.

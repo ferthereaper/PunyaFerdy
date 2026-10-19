@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../includes/auth.php';   // sudah memulai session & mengecek login
+require_once __DIR__ . '/../../includes/csrf.php';
 require __DIR__ . '/../../includes/koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -7,9 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$id          = $_POST['id'] ?? null;
-$idPelanggan = $_POST['id_pelanggan'] ?? '';
-$idProduk    = $_POST['id_produk'] ?? '';
+csrf_verify();
+
+$id          = !empty($_POST['id']) ? (int) $_POST['id'] : null;
+$idPelanggan = (int) ($_POST['id_pelanggan'] ?? 0);
+$idProduk    = (int) ($_POST['id_produk'] ?? 0);
 $jumlah      = (int)($_POST['jumlah'] ?? 1);
 
 $errors = [];

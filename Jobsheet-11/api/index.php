@@ -18,11 +18,11 @@ $totalPelanggan = $pdo->query("SELECT COUNT(*) FROM pelanggan")->fetchColumn();
     <h2>Ringkasan</h2>
     <article>
         <h3>Total Produk</h3>
-        <p><?php echo $totalProduk; ?></p>
+        <p><?php echo (int) $totalProduk; ?></p>
     </article>
     <article>
         <h3>Total Pelanggan</h3>
-        <p><?php echo $totalPelanggan; ?></p>
+        <p><?php echo (int) $totalPelanggan; ?></p>
     </article>
     <article>
         <h3>Sedang Diproses</h3>

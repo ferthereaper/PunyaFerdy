@@ -416,3 +416,24 @@ header .navbar .btn-logout:focus-visible {
         order: 4;
     }
 }
+/* ===== Tombol Hapus (form POST + token CSRF) ===== */
+.form-hapus {
+    display: inline;
+    margin: 0;
+}
+
+td form.form-hapus button.btn-hapus {
+    display: inline-block;
+    padding: 0.35rem 0.7rem;
+    background-color: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+td form.form-hapus button.btn-hapus:hover {
+    background-color: #c62828;
+}

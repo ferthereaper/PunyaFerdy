@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../../includes/session.php';
+require_once __DIR__ . '/../../includes/helpers.php';
+require_once __DIR__ . '/../../includes/csrf.php';
 
 require_once __DIR__ . '/../../includes/auth.php';
 require __DIR__ . '/../../includes/koneksi.php';
@@ -38,12 +40,13 @@ unset($_SESSION['flash']);
     <h2><?php echo $is_edit ? "Edit Pesanan" : "Tambah Pesanan Baru"; ?></h2>
 
     <?php if ($flash): ?>
-        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo htmlspecialchars($flash['pesan']); ?></p>
+        <p class="flash flash-<?php echo e($flash['type']); ?>"><?php echo e($flash['pesan']); ?></p>
     <?php endif; ?>
 
     <form id="form-tambah" method="post" action="proses_tambah.php">
+        <?php echo csrf_field(); ?>
         <?php if ($is_edit): ?>
-            <input type="hidden" name="id" value="<?php echo $pesanan['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo (int) $pesanan['id']; ?>">
         <?php endif; ?>
 
         <p>
@@ -51,8 +54,8 @@ unset($_SESSION['flash']);
             <select id="id_pelanggan" name="id_pelanggan" required>
                 <option value="">-- Pilih Pelanggan --</option>
                 <?php foreach ($pelangganList as $p): ?>
-                    <option value="<?php echo $p['id']; ?>" <?php echo ($p['id'] == $pesanan['id_pelanggan']) ? 'selected' : ''; ?>>
-                        <?php echo htmlspecialchars($p['nama']); ?>
+                    <option value="<?php echo (int) $p['id']; ?>" <?php echo ($p['id'] == $pesanan['id_pelanggan']) ? 'selected' : ''; ?>>
+                        <?php echo e($p['nama']); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -63,8 +66,8 @@ unset($_SESSION['flash']);
             <select id="id_produk" name="id_produk" required>
                 <option value="">-- Pilih Produk --</option>
                 <?php foreach ($produkList as $pr): ?>
-                    <option value="<?php echo $pr['id']; ?>" <?php echo ($pr['id'] == $pesanan['id_produk']) ? 'selected' : ''; ?>>
-                        <?php echo htmlspecialchars($pr['nama_produk']); ?> (Rp <?php echo number_format($pr['harga'], 0, ',', '.'); ?>)
+                    <option value="<?php echo (int) $pr['id']; ?>" <?php echo ($pr['id'] == $pesanan['id_produk']) ? 'selected' : ''; ?>>
+                        <?php echo e($pr['nama_produk']); ?> (Rp <?php echo number_format((float) $pr['harga'], 0, ',', '.'); ?>)
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -72,7 +75,7 @@ unset($_SESSION['flash']);
 
         <p>
             <label for="jumlah">Jumlah</label><br>
-            <input type="number" id="jumlah" name="jumlah" min="1" value="<?php echo htmlspecialchars($pesanan['jumlah']); ?>" required>
+            <input type="number" id="jumlah" name="jumlah" min="1" value="<?php echo e($pesanan['jumlah']); ?>" required>
         </p>
 
         <p>

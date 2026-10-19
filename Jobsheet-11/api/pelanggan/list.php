@@ -2,11 +2,14 @@
 require_once __DIR__ . '/../../includes/session.php';
 
 require_once __DIR__ . '/../../includes/auth.php';
+require_once __DIR__ . '/../../includes/helpers.php';
+require_once __DIR__ . '/../../includes/csrf.php';
 require __DIR__ . '/../../includes/koneksi.php';
 
 // Logika Hapus Data
-if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id'])) {
-    $id = (int)$_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'hapus') {
+    csrf_verify();
+    $id = (int)($_POST['id'] ?? 0);
     $stmt = $pdo->prepare("DELETE FROM pelanggan WHERE id = ?");
     $stmt->execute([$id]);
 
@@ -33,7 +36,7 @@ $daftarPelanggan = $pdo->query("SELECT * FROM pelanggan ORDER BY id DESC")->fetc
     <h2>Daftar Pelanggan</h2>
 
     <?php if ($flash): ?>
-        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo htmlspecialchars($flash['pesan']); ?></p>
+        <p class="flash flash-<?php echo e($flash['type']); ?>"><?php echo e($flash['pesan']); ?></p>
     <?php endif; ?>
 
     <div class="search-box">
@@ -60,16 +63,19 @@ $daftarPelanggan = $pdo->query("SELECT * FROM pelanggan ORDER BY id DESC")->fetc
                 <?php else: ?>
                     <?php foreach ($daftarPelanggan as $pelanggan): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($pelanggan['nama']); ?></td>
-                            <td><?php echo htmlspecialchars($pelanggan['email'] ?? '-'); ?></td>
-                            <td><?php echo htmlspecialchars($pelanggan['no_hp'] ?? '-'); ?></td>
-                            <td><?php echo htmlspecialchars($pelanggan['alamat'] ?? '-'); ?></td>
+                            <td><?php echo e($pelanggan['nama']); ?></td>
+                            <td><?php echo e($pelanggan['email'] ?? '-'); ?></td>
+                            <td><?php echo e($pelanggan['no_hp'] ?? '-'); ?></td>
+                            <td><?php echo e($pelanggan['alamat'] ?? '-'); ?></td>
                             <td>
                                 <!-- FIX 2: Sesuaikan path tombol Edit & Hapus -->
-                                <a href="<?php echo BASE_URL; ?>/api/pelanggan/tambah.php?id=<?php echo $pelanggan['id']; ?>" class="btn">Edit</a>
-                                <a href="<?php echo BASE_URL; ?>/api/pelanggan/list.php?action=hapus&id=<?php echo $pelanggan['id']; ?>" 
-                                   class="btn-hapus" 
-                                   onclick="return confirm('Apakah Anda yakin ingin menghapus pelanggan ini?')">Hapus</a>
+                                <a href="<?php echo e(BASE_URL); ?>/api/pelanggan/tambah.php?id=<?php echo (int) $pelanggan['id']; ?>" class="btn">Edit</a>
+                                <form method="post" action="<?php echo e(BASE_URL); ?>/api/pelanggan/list.php" class="form-hapus">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="action" value="hapus">
+                                    <input type="hidden" name="id" value="<?php echo (int) $pelanggan['id']; ?>">
+                                    <button type="submit" class="btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus pelanggan ini?')">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>

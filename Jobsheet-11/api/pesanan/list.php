@@ -2,11 +2,14 @@
 require_once __DIR__ . '/../../includes/session.php';
 
 require_once __DIR__ . '/../../includes/auth.php';
+require_once __DIR__ . '/../../includes/helpers.php';
+require_once __DIR__ . '/../../includes/csrf.php';
 require __DIR__ . '/../../includes/koneksi.php';
 
 // Logika Hapus Data Pesanan
-if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id'])) {
-    $id = (int)$_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'hapus') {
+    csrf_verify();
+    $id = (int)($_POST['id'] ?? 0);
     $stmt = $pdo->prepare("DELETE FROM pesanan WHERE id = ?");
     $stmt->execute([$id]);
 
@@ -38,7 +41,7 @@ $daftarPesanan = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
     <h2>Daftar Pesanan</h2>
 
     <?php if ($flash): ?>
-        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo htmlspecialchars($flash['pesan']); ?></p>
+        <p class="flash flash-<?php echo e($flash['type']); ?>"><?php echo e($flash['pesan']); ?></p>
     <?php endif; ?>
 
     <div class="table-responsive">
@@ -61,16 +64,19 @@ $daftarPesanan = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
                 <?php else: ?>
                     <?php foreach ($daftarPesanan as $pesanan): ?>
                         <tr>
-                            <td>#<?php echo $pesanan['id']; ?></td>
-                            <td><?php echo htmlspecialchars($pesanan['nama_pelanggan'] ?? 'Pelanggan Terhapus'); ?></td>
-                            <td><?php echo htmlspecialchars($pesanan['nama_produk'] ?? 'Produk Terhapus'); ?></td>
-                            <td><?php echo $pesanan['jumlah']; ?></td>
+                            <td>#<?php echo (int) $pesanan['id']; ?></td>
+                            <td><?php echo e($pesanan['nama_pelanggan'] ?? 'Pelanggan Terhapus'); ?></td>
+                            <td><?php echo e($pesanan['nama_produk'] ?? 'Produk Terhapus'); ?></td>
+                            <td><?php echo (int) $pesanan['jumlah']; ?></td>
                             <td>Rp <?php echo number_format($pesanan['total_harga'], 0, ',', '.'); ?></td>
                             <td>
-                                <a href="<?php echo BASE_URL; ?>/api/pesanan/tambah.php?id=<?php echo $pesanan['id']; ?>" class="btn">Edit</a>
-                                <a href="<?php echo BASE_URL; ?>/api/pesanan/list.php?action=hapus&id=<?php echo $pesanan['id']; ?>"
-                                class="btn-hapus"
-                                onclick="return confirm('Apakah Anda yakin ingin menghapus pesanan ini?')">Hapus</a>
+                                <a href="<?php echo e(BASE_URL); ?>/api/pesanan/tambah.php?id=<?php echo (int) $pesanan['id']; ?>" class="btn">Edit</a>
+                                <form method="post" action="<?php echo e(BASE_URL); ?>/api/pesanan/list.php" class="form-hapus">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="action" value="hapus">
+                                    <input type="hidden" name="id" value="<?php echo (int) $pesanan['id']; ?>">
+                                    <button type="submit" class="btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus pesanan ini?')">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>

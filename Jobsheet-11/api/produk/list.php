@@ -2,11 +2,14 @@
 require_once __DIR__ . '/../../includes/session.php';
 
 require_once __DIR__ . '/../../includes/auth.php';
+require_once __DIR__ . '/../../includes/helpers.php';
+require_once __DIR__ . '/../../includes/csrf.php';
 require __DIR__ . '/../../includes/koneksi.php';
 
 // Logika Hapus Produk
-if (isset($_GET['action']) && $_GET['action'] === 'hapus' && isset($_GET['id'])) {
-    $id = (int)$_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'hapus') {
+    csrf_verify();
+    $id = (int)($_POST['id'] ?? 0);
     $stmt = $pdo->prepare("DELETE FROM produk WHERE id = ?");
     $stmt->execute([$id]);
 
@@ -33,7 +36,7 @@ $daftarProduk = $pdo->query("SELECT * FROM produk ORDER BY id DESC")->fetchAll(P
     <h2>Daftar Produk</h2>
 
     <?php if ($flash): ?>
-        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo htmlspecialchars($flash['pesan']); ?></p>
+        <p class="flash flash-<?php echo e($flash['type']); ?>"><?php echo e($flash['pesan']); ?></p>
     <?php endif; ?>
 
     <div class="search-box">
@@ -59,15 +62,18 @@ $daftarProduk = $pdo->query("SELECT * FROM produk ORDER BY id DESC")->fetchAll(P
                 <?php else: ?>
                     <?php foreach ($daftarProduk as $produk): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($produk['nama'] ?? $produk['nama_produk']); ?></td>
+                            <td><?php echo e($produk['nama'] ?? $produk['nama_produk']); ?></td>
                             <td>Rp <?php echo number_format($produk['harga'] ?? 0, 0, ',', '.'); ?></td>
-                            <td><?php echo htmlspecialchars($produk['stok'] ?? 0); ?></td>
+                            <td><?php echo e($produk['stok'] ?? 0); ?></td>
                             <td>
                                 <!-- Link memakai BASE_URL, jadi tidak bergantung pada nama folder -->
-                                <a href="<?php echo BASE_URL; ?>/api/produk/tambah.php?id=<?php echo $produk['id']; ?>" class="btn">Edit</a>
-                                <a href="<?php echo BASE_URL; ?>/api/produk/list.php?action=hapus&id=<?php echo $produk['id']; ?>" 
-                                   class="btn-hapus" 
-                                   onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</a>
+                                <a href="<?php echo e(BASE_URL); ?>/api/produk/tambah.php?id=<?php echo (int) $produk['id']; ?>" class="btn">Edit</a>
+                                <form method="post" action="<?php echo e(BASE_URL); ?>/api/produk/list.php" class="form-hapus">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="action" value="hapus">
+                                    <input type="hidden" name="id" value="<?php echo (int) $produk['id']; ?>">
+                                    <button type="submit" class="btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
